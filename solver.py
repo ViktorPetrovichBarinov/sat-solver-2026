@@ -235,7 +235,7 @@ class Solver:
         if self.sigkill.is_set():
             return SATSolverResult.UNKNOWN
 
-        control, in_heap, phase = self.control, self.in_heap, self.phase
+        control, in_heap, phase, act = self.control, self.in_heap, self.phase, self.act
         checks = 0
         while True:
             if not self.propagate():
@@ -260,7 +260,7 @@ class Solver:
                     values[t] = 0
                     values[t ^ 1] = 0
                     if not in_heap[tv]:
-                        heappush(self.heap, (-self.act[tv], tv))
+                        heappush(self.heap, (-act[tv], tv))
                         in_heap[tv] = True
                 del trail[start:]
                 del control[level - 1:]

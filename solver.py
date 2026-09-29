@@ -180,11 +180,15 @@ class Solver:
                     watches[c[pos]].append([c[pos ^ 1], c])
                     continue
                 rest = c[pos ^ 1]
-                if values[rest] == 0:
+                vr = values[rest]
+                if vr == 0:
                     values[rest] = 1
                     values[rest ^ 1] = -1
                     trail.append(rest)
                     entry[0] = rest
+                    ws[j] = entry
+                    j += 1
+                elif vr == 1:
                     ws[j] = entry
                     j += 1
                 else:
